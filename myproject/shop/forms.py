@@ -1,7 +1,5 @@
 from django import forms
-from .models import Review
-from .models import Shipping
-from .models import Profile
+from .models import Review, Shipping, Profile
 from django.contrib.auth.models import User
 
 class UserForm(forms.ModelForm):

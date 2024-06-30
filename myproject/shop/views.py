@@ -11,6 +11,12 @@ from django.http import HttpResponseBadRequest
 from django.views.decorators.csrf import csrf_exempt
 from .forms import UserForm, ProfileForm
 
+def home(request):
+    return render(request, 'shop/home.html')
+def product_list(request):
+    return render(request, 'shop/product/list.html', {
+        'some_url': reverse('shop:home'),
+    })
 
 @login_required
 def profile(request):
@@ -100,15 +106,12 @@ def search(request):
 def product_list(request, category_slug=None):
     category = None
     categories = Category.objects.all()
-    products = Product.objects.filter(available=True)
+    products = Product.objects.all()
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
         products = products.filter(category=category)
-    return render(request, 'shop/product/list.html', {
-        'category': category,
-        'categories': categories,
-        'products': products
-    })
+    return render(request, 'shop/product/list.html', {'category': category, 'categories': categories, 'products': products})
+
 @login_required
 def add_review(request, product_id):
     product = get_object_or_404(Product, id=product_id)
@@ -136,9 +139,8 @@ def category_list(request):
 
 def product_list_by_category(request, category_slug):
     category = get_object_or_404(Category, slug=category_slug)
-    products = category.products.all()
-    return render(request, 'shop/product_list_by_category.html', {'category': category, 'products': products})
-
+    products = Product.objects.filter(category=category)
+    return render(request, 'shop/product/list.html', {'category': category, 'products': products})
 
 @login_required
 def place_order(request):
