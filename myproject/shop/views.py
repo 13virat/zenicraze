@@ -4,19 +4,18 @@ from django.contrib.auth.decorators import login_required
 from .models import Product, Review
 from .forms import ReviewForm
 from django.db.models import Q
-from .forms import SearchForm
 from .models import Shipping, Order, Payment ,Category
 from .forms import ShippingForm
 from django.http import HttpResponseBadRequest
 from django.views.decorators.csrf import csrf_exempt
-from .forms import UserForm, ProfileForm
+from .forms import UserForm, ProfileForm,SearchForm
 
 def home(request):
     return render(request, 'shop/home.html')
-def product_list(request):
-    return render(request, 'shop/product/list.html', {
-        'some_url': reverse('shop:home'),
-    })
+# def product_list(request):
+#     return render(request, 'shop/product/list.html', {
+#         'some_url': reverse('shop:home'),
+#     })
 
 @login_required
 def profile(request):
@@ -92,15 +91,19 @@ def shipping(request):
         form = ShippingForm()
     return render(request, 'shop/shipping.html', {'form': form})
 
+@csrf_exempt
+@login_required
 def search(request):
     form = SearchForm()
     query = None
     results = []
+
     if 'query' in request.GET:
         form = SearchForm(request.GET)
         if form.is_valid():
             query = form.cleaned_data['query']
             results = Product.objects.filter(Q(name__icontains=query) | Q(description__icontains=query))
+
     return render(request, 'shop/search.html', {'form': form, 'query': query, 'results': results})
 
 def product_list(request, category_slug=None):
