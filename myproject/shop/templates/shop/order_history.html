@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order History</title>
+</head>
+<body>
+    <h2>Order History</h2>
+    {% for order in orders %}
+        <div>
+            <h3>Order ID: {{ order.id }}</h3>
+            <p>Created at: {{ order.created_at }}</p>
+            <p>Total amount: ${{ order.total_amount }}</p>
+            <h4>Items:</h4>
+            <ul>
+                {% for item in order.items.all %}
+                    <li>{{ item.quantity }} x {{ item.product.name }} - ${{ item.price }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <hr>
+    {% endfor %}
+</body>
+</html>

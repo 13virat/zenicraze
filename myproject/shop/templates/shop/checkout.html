@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Checkout</title>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body>
+    <h2>Checkout</h2>
+    <form id="payment-form">
+        <button type="button" onclick="payNow()">Pay Now</button>
+    </form>
+    <script>
+        function payNow() {
+            var options = {
+                "key": "{{ razorpay_key }}",
+                "amount": "{{ amount }}",
+                "currency": "INR",
+                "name": "My E-commerce Site",
+                "description": "Test Transaction",
+                "order_id": "{{ order_id }}",
+                "handler": function (response){
+                    var form = document.createElement("form");
+                    form.setAttribute("method", "post");
+                    form.setAttribute("action", "{% url 'payment_success' %}");
+                    form.innerHTML += '<input type="hidden" name="razorpay_payment_id" value="' + response.razorpay_payment_id + '">';
+                    form.innerHTML += '<input type="hidden" name="razorpay_order_id" value="' + response.razorpay_order_id + '">';
+                    form.innerHTML += '<input type="hidden" name="razorpay_signature" value="' + response.razorpay_signature + '">';
+                    document.body.appendChild(form);
+                    form.submit();
+                },
+                "theme": {
+                    "color": "#3399cc"
+                }
+            };
+            var rzp1 = new Razorpay(options);
+            rzp1.open();
+        }
+    </script>
+</body>
+</html>

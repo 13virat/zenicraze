@@ -1,10 +1,13 @@
 from django.contrib import admin
-from .models import Category, Product, Order, OrderItem,ResinCraft, CrochetedItem, Candle, Cake, Crunchy
+from .models import Category, Product, Order, OrderItem, ResinCraft, CrochetedItem, Candle, Cake, Crunchy
+
+# Removed the duplicate registration for Category and Product
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ['name']
     search_fields = ['name']
+
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('name', 'price', 'stock', 'available', 'created_at', 'updated_at')
@@ -32,10 +35,10 @@ class CakeAdmin(ProductAdmin):
 class CrunchyAdmin(ProductAdmin):
     list_display = ('name', 'price', 'stock', 'available', 'ingredients', 'created_at', 'updated_at')
 
-
 class OrderItemInline(admin.TabularInline):
     model = OrderItem
-    raw_id_fields = ['product']
+    readonly_fields = ['product', 'quantity', 'price']
+    extra = 0
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):

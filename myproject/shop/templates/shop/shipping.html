@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shipping Information</title>
+</head>
+<body>
+    <h2>Shipping Information</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Continue to Checkout</button>
+    </form>
+</body>
+</html>
