@@ -64,13 +64,13 @@ Installation
 
 1.  **Clone the repository:**
 
-    `git clone https://github.com/yourusername/zenicraze.git
+    `git clone https://github.com/13virat/zenicraze.git
     cd zenicraze`
 
 2.  **Create a virtual environment and activate it:**
-3.  
-    `python -m venv env
-    source env/bin/activate  # On Windows use `env\Scripts\activate``
+  
+    `python -m venv env`
+    `source env/bin/activate`  # On Windows use `env\Scripts\activate`
 
 4.  **Install the dependencies:**
 
