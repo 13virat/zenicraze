@@ -2,11 +2,17 @@ import React from "react";
 import { motion } from "framer-motion";
 import { PrimaryButton } from "./PrimaryButton";
 import { PrimaryButtonWrapper } from "./PrimaryButtonWrapper";
+import Gradient from "./assets/Gradient.svg";
 
 export const Hero = () => {
   return (
     <section className="relative flex flex-col items-center justify-center min-h-screen text-black px-4 md:px-0 overflow-hidden">
       {/* Heading Section */}
+     <div
+  className="absolute top-[-490px] left-[-502px] w-[851px] h-[869px]"
+>
+  <img src={Gradient} alt="" />
+</div>
       <motion.h1
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -73,6 +79,14 @@ export const Hero = () => {
         <PrimaryButton property1="default" />
         <PrimaryButtonWrapper />
       </motion.div>
+
+     <div className="relative h-[150px] bottom-[500px] -right-[350px] z-[-1]">
+  <img src={Gradient} alt="" />
+</div>
+
+
+
     </section>
+
   );
 };
