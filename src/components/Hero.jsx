@@ -17,7 +17,7 @@ export const Hero = () => {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
-        className="text-center text-[2.8rem] md:text-[4rem] lg:text-[4.5rem] font-medium leading-tight text-[#0D0D0D] dark:text-white max-w-[900px]"
+        className="text-center text-[2.8rem] md:text-[4rem] lg:text-[4.5rem] font-medium leading-tight text-[#0D0D0D]  max-w-[900px]"
       >
         <span className="block  font-medium">Skyrocket Your 
         <span className="italic font-italic Serif text-[4.5rem] md:text-[5rem] ">Brand</span></span>
